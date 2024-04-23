@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo e Estimativa de Despesas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #resultado {
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cálculo e Estimativa de Despesas</h1>
+    <form id="form-gastos">
+        <label for="aluguel">Aluguel:</label>
+        <input type="number" id="aluguel" name="aluguel" min="0" step="0.01" required><br>
+
+        <label for="agua">Água:</label>
+        <input type="number" id="agua" name="agua" min="0" step="0.01" required><br>
+
+        <label for="energia">Energia Elétrica:</label>
+        <input type="number" id="energia" name="energia" min="0" step="0.01" required><br>
+
+        <label for="folha_pagamento">Folha de Pagamento:</label>
+        <input type="number" id="folha_pagamento" name="folha_pagamento" min="0" step="0.01" required><br>
+
+        <label for="impostos">Impostos:</label>
+        <input type="number" id="impostos" name="impostos" min="0" step="0.01" required><br>
+
+        <label for="outros">Outros:</label>
+        <input type="number" id="outros" name="outros" min="0" step="0.01" required><br>
+
+        <button type="submit">Calcular</button>
+    </form>
+
+    <div id="resultado">
+        <h2>Resultado</h2>
+        <p id="total"></p>
+        <p id="media"></p>
+        <p id="estimativa"></p>
+    </div>
+
+    <script>
+        document.getElementById("form-gastos").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            var aluguel = parseFloat(document.getElementById("aluguel").value);
+            var agua = parseFloat(document.getElementById("agua").value);
+            var energia = parseFloat(document.getElementById("energia").value);
+            var folhaPagamento = parseFloat(document.getElementById("folha_pagamento").value);
+            var impostos = parseFloat(document.getElementById("impostos").value);
+            var outros = parseFloat(document.getElementById("outros").value);
+
+            var total = aluguel + agua + energia + folhaPagamento + impostos + outros;
+            var media = total / 6; // 6 é o número de categorias
+            var estimativaAnual = total * 12;
+
+            document.getElementById("resultado").style.display = "block";
+            document.getElementById("total").textContent = "Total de despesas mensais: R$ " + total.toFixed(2);
+            document.getElementById("media").textContent = "Média de gastos mensais: R$ " + media.toFixed(2);
+            document.getElementById("estimativa").textContent = "Estimativa de gastos anual: R$ " + estimativaAnual.toFixed(2);
+        });
+    </script>
+</body>
+</html>
